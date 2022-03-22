@@ -9,6 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "react-navigation";
 import Contactscreen from "./screen/Contactscreen";
 import DetailContactScreen from "./screen/DetailContactScreen";
+import { getList } from "./api";
 
 // const Appnavigator = createSwitchNavigator({
 //   addContact:AddContactScreen,
@@ -42,6 +43,13 @@ export default class App extends React.Component {
       ...prev,
       contacts: [...prev.contacts,contact],
     }));
+  }
+  fetchList = async() => {
+    const results = await getList();
+    this.setState({contacts:results})
+  }
+  componentDidMount(){
+    this.fetchList();
   }
 
   render() {
