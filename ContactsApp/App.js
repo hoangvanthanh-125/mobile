@@ -1,15 +1,16 @@
+import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { StyleSheet } from "react-native";
-import { createSwitchNavigator } from "react-navigation";
+import "react-native-gesture-handler";
+import { NavigationContainer } from '@react-navigation/native';
+import { getList } from "./api";
 import contacts, { compareName } from "./components/contact";
 import AddContactScreen from "./screen/AddContactScreen";
-import LoginScreen from "./screen/LoginScreen";
-import "react-native-gesture-handler";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "react-navigation";
 import Contactscreen from "./screen/Contactscreen";
 import DetailContactScreen from "./screen/DetailContactScreen";
-import { getList } from "./api";
+import LoginScreen from "./screen/LoginScreen";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 // const Appnavigator = createSwitchNavigator({
 //   addContact:AddContactScreen,
@@ -54,16 +55,18 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <MyContext.Provider value={{ contacts: this.state.contacts ,sortList:this.sortList,addContact:this.addContact}}>
+    <Provider store={store}>
+        <MyContext.Provider value={{ contacts: this.state.contacts ,sortList:this.sortList,addContact:this.addContact}}>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="login">
             <Stack.Screen name="contact" component={Contactscreen} />
             <Stack.Screen name="login" component={LoginScreen} />
             <Stack.Screen name="add" component={AddContactScreen} />
-            <Stack.Screen name='detail' component={DetailContactScreen} />
+            <Stack.Screen name='deail' component={DetailContactScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </MyContext.Provider>
+    </Provider>
     );
   }
 }

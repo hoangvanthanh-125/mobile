@@ -4,9 +4,11 @@ import { useContext } from "react";
 import { ContactList } from "../components/ContactList";
 import FormAddContact from "../components/FormAddContact";
 import { MyContext } from "../App";
+import { useSelector } from "react-redux";
 function Contactscreen({navigation}) {
-  const {contacts,sortList} = useContext(MyContext)
+  // const {contacts,sortList} = useContext(MyContext)
   // console.log(c.contacts + "haha");
+  const {contacts} = useSelector(state => state)
   return (
     <View >
       <Button

@@ -16,7 +16,6 @@ export default class FormAddContact extends React.Component{
       phone:this.state.phone,
       name:this.state.name
     })
-    this.props.navigation.navigate('contact')
   }
   render(){
     return (

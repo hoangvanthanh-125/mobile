@@ -1,6 +1,6 @@
 import React from 'react';
 import {View,Text,Button,TextInput} from 'react-native'
-import { useState } from 'react/cjs/react.production.min';
+import { useState } from 'react';
 
 function LoginScreen({navigation}) {
   const [user,setuser] = useState({
