@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { StyleSheet } from "react-native";
 import "react-native-gesture-handler";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
 import { getList } from "./api";
 import contacts, { compareName } from "./components/contact";
 import AddContactScreen from "./screen/AddContactScreen";
@@ -10,7 +10,8 @@ import Contactscreen from "./screen/Contactscreen";
 import DetailContactScreen from "./screen/DetailContactScreen";
 import LoginScreen from "./screen/LoginScreen";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store, { persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 // const Appnavigator = createSwitchNavigator({
 //   addContact:AddContactScreen,
@@ -42,31 +43,41 @@ export default class App extends React.Component {
   addContact = (contact) => {
     this.setState((prev) => ({
       ...prev,
-      contacts: [...prev.contacts,contact],
+      contacts: [...prev.contacts, contact],
     }));
-  }
-  fetchList = async() => {
+  };
+  fetchList = async () => {
     const results = await getList();
-    this.setState({contacts:results})
-  }
-  componentDidMount(){
+    this.setState({
+      contacts: results,
+    });
+  };
+  componentDidMount() {
     this.fetchList();
   }
 
   render() {
     return (
-    <Provider store={store}>
-        <MyContext.Provider value={{ contacts: this.state.contacts ,sortList:this.sortList,addContact:this.addContact}}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="login">
-            <Stack.Screen name="contact" component={Contactscreen} />
-            <Stack.Screen name="login" component={LoginScreen} />
-            <Stack.Screen name="add" component={AddContactScreen} />
-            <Stack.Screen name='deail' component={DetailContactScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </MyContext.Provider>
-    </Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MyContext.Provider
+            value={{
+              contacts: this.state.contacts,
+              sortList: this.sortList,
+              addContact: this.addContact,
+            }}
+          >
+            <NavigationContainer>
+              <Stack.Navigator initialRouteName="login">
+                <Stack.Screen name="contact" component={Contactscreen} />
+                <Stack.Screen name="login" component={LoginScreen} />
+                <Stack.Screen name="add" component={AddContactScreen} />
+                <Stack.Screen name="deail" component={DetailContactScreen} />
+              </Stack.Navigator>
+            </NavigationContainer>
+          </MyContext.Provider>
+        </PersistGate>
+      </Provider>
     );
   }
 }
