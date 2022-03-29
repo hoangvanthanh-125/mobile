@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store, { persistor } from "./redux/store";
 import DetailMovieScreen from "./screen/DetailMovieScreen";
 import MovieScreen from "./screen/MovieScreen";
+import SearchScreen from "./screen/SearchScreen";
 
 const Stack = createStackNavigator();
 export const MyContext = React.createContext();
@@ -25,6 +26,8 @@ export default class App extends React.Component {
               <Stack.Navigator initialRouteName="movie">
                 <Stack.Screen name="movie" component={MovieScreen} />
                 <Stack.Screen name="detail" component={DetailMovieScreen}  options={({ route }) => ({ title: route.params.title })} />   
+                <Stack.Screen name="search" component={SearchScreen} />
+                
               </Stack.Navigator>
             </NavigationContainer>
         </PersistGate>

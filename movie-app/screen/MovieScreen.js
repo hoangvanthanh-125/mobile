@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ListMovie } from "../components/ListMovie";
 import { fetchListFilmAction } from "../redux/actions";
@@ -14,6 +14,7 @@ function MovieScreen({navigation}) {
   
   return (
     <View style={styles.container} >
+      <Button title = 'Tìm kiếm phim' onPress={() => navigation.navigate('search')} />
       <Text style={styles.title}>Danh sách phim</Text>
       <View>
         <ListMovie navigation={navigation} listMovie={listMovie} />
