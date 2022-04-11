@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Text, Image, TouchableOpacity } from "react-native";
+import { Text, Image, TouchableOpacity,StyleSheet } from "react-native";
 
 export const MovieItem = (props) => {
   const handlePress = () => {
-    props.navigation.navigate("detail",{
+    props.navigation.push("detail",{
       id:props.id,
       title:props.title
     });
@@ -18,10 +18,7 @@ export const MovieItem = (props) => {
       }}
     >
       <Image
-        style={{
-          width:100,
-          height: 100,
-        }}
+        style = {styles.image}
         source={`https://image.tmdb.org/t/p/w500${props?.poster_path}`}
       />
       <Text
@@ -35,3 +32,10 @@ export const MovieItem = (props) => {
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  image:{
+    width:150,
+    height: 200,
+  }
+})

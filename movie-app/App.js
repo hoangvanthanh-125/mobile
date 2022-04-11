@@ -9,24 +9,24 @@ import store, { persistor } from "./redux/store";
 import DetailMovieScreen from "./screen/DetailMovieScreen";
 import MovieScreen from "./screen/MovieScreen";
 import SearchScreen from "./screen/SearchScreen";
+import WatchScreen from "./screen/WatchScreen";
 
 const Stack = createStackNavigator();
 export const MyContext = React.createContext();
 
 export default class App extends React.Component {
   
-  
-
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
 
             <NavigationContainer>
-              <Stack.Navigator initialRouteName="movie">
-                <Stack.Screen name="movie" component={MovieScreen} />
+              <Stack.Navigator initialRouteName="Movie">
+                <Stack.Screen name="Movie" component={MovieScreen} />
                 <Stack.Screen name="detail" component={DetailMovieScreen}  options={({ route }) => ({ title: route.params.title })} />   
                 <Stack.Screen name="search" component={SearchScreen} />
+                <Stack.Screen name="Watch" component={WatchScreen}  options={({ route }) => ({ title: ` Xem phim ${route.params.title}` })} />
                 
               </Stack.Navigator>
             </NavigationContainer>
