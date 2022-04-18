@@ -1,27 +1,18 @@
-import React from "react";
-import { View, Button } from "react-native";
-import { useContext } from "react";
-import { ContactList } from "../components/ContactList";
-import FormAddContact from "../components/FormAddContact";
-import { MyContext } from "../App";
+import React, { useContext } from "react";
+import { Button, View } from "react-native";
 import { useSelector } from "react-redux";
+import { MyContext } from "../App";
+import { ContactList } from "../components/ContactList";
 function Contactscreen({navigation}) {
-  // const {contacts,sortList} = useContext(MyContext)
-  // console.log(c.contacts + "haha");
+  
+  
   const {contacts} = useSelector(state => state)
   return (
-    <View >
-      <Button
-        style={{ backgroundColor: "red" }}
-        title="sort"
-        onPress={() => sortList()}
-      />
-      <Button
-        title="toggle"
-        // onPress={this.toggleContact}
-      />
-      <Button title="add" onPress={() =>navigation.navigate('add') } />
-
+    <View style={{padding:10}} >
+     <View style={{marginBottom:10}}>
+   
+     </View>
+      <Button title="Add" onPress={() =>navigation.navigate('add') } />
       <ContactList navigation={navigation} contacts={contacts} />
     </View>
   );

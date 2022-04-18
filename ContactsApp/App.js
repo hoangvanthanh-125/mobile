@@ -13,10 +13,6 @@ import { Provider } from "react-redux";
 import store, { persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
-// const Appnavigator = createSwitchNavigator({
-//   addContact:AddContactScreen,
-//   login:LoginScreen
-// })
 const Stack = createStackNavigator();
 export const MyContext = React.createContext();
 
@@ -72,7 +68,7 @@ export default class App extends React.Component {
                 <Stack.Screen name="contact" component={Contactscreen} />
                 <Stack.Screen name="login" component={LoginScreen} />
                 <Stack.Screen name="add" component={AddContactScreen} />
-                <Stack.Screen name="deail" component={DetailContactScreen} />
+                <Stack.Screen name="detail" component={DetailContactScreen} options={({route}) => ({title:route.params.name})} />
               </Stack.Navigator>
             </NavigationContainer>
           </MyContext.Provider>

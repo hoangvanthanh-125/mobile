@@ -19,9 +19,9 @@ export default class FormAddContact extends React.Component{
   }
   render(){
     return (
-      <View>
-      <TextInput style={styles.input} onChangeText={this.changeName} />
-      <TextInput  style={styles.input} onChangeText={this.changePhone} keyboardType='numeric'  />
+      <View style={styles.container}>
+      <TextInput style={styles.input} onChangeText={this.changeName} placeholder="Nhập tên " />
+      <TextInput  style={styles.input} onChangeText={this.changePhone} keyboardType='numeric' placeholder="Nhập số điện thoại" />
       <Button title='Add' onPress={this.submit} />
       </View>
     )
@@ -30,6 +30,11 @@ export default class FormAddContact extends React.Component{
 const styles = StyleSheet.create({
  input:{
    borderColor:'black',
-   borderWidth:1
+   borderWidth:1,
+   marginTop:10,
+   marginBottom:10
+ },
+ container:{
+   padding:10
  }
 });
